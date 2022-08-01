@@ -1,31 +1,29 @@
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import Looks3Icon from "@mui/icons-material/Looks3";
-import LocalGasStationIcon from "@mui/icons-material/LocalGasStation";
+import LooksOneIcon from "@mui/icons-material/LooksOne";
 
-import GasFaucet from "../../../pages/gasFaucet/GasFaucet";
-import Faq from "../../../pages/Faq/Faq";
-import Page3 from "../../../pages/Page3/Page3";
+import CreateNewProposal from "../../../pages/Group2/CreateNewProposal/CreateNewProposal";
+import ViewCurrentProposals from "../../../pages/Group2/ViewCurrentProposals/ViewCurrentProposals";
+import ViewOldProposals from "../../../pages/Group2/ViewOldProposals/ViewOldProposals";
 
 export const sidebarLabel2 = [
     {
         id: 0,
-        icon: <LocalGasStationIcon />,
-        label: "GAS Faucet",
-        route: "gas-faucet",
-        page: <GasFaucet />,
+        icon: <LooksOneIcon />,
+        label: "Create New Proposal",
+        route: "create-new-proposal",
+        page: <CreateNewProposal />,
     },
     {
         id: 1,
-        icon: <QuestionMarkIcon />,
-        label: "FAQ",
-        route: "faq",
-        page: <Faq />,
+        icon: <LooksOneIcon />,
+        label: "View Current Proposals",
+        route: "view-current-proposals",
+        page: <ViewCurrentProposals />,
     },
     {
         id: 2,
-        icon: <Looks3Icon />,
-        label: "Page Three",
-        route: "page3",
-        page: <Page3 />,
+        icon: <LooksOneIcon />,
+        label: "View Old Proposals",
+        route: "view-old-proposals",
+        page: <ViewOldProposals />,
     },
 ];

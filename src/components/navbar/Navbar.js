@@ -1,79 +1,101 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link } from "@mui/material";
-
-import { useMetamaskConnectContext } from "../../contexts/metamaskConnectProvider";
+import LoginModal from "../loginModal/LoginModal";
+import RegisterModal from "../registerModal/RegisterModal";
+import Avatar from "@mui/material/Avatar";
+import { useUserContext } from "../../contexts/userProvider";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { Box } from "@mui/system";
 
 const Navbar = () => {
-    let { metamaskSetupOperations, connectWallet, currentAccountAddress, metamaskExistCheck, currentChainId, currentAccountGasBal, setCurrentAccountAddress, setMetamaskExistCheck, setCurrentChainId, setCurrentAccountGasBal } = useMetamaskConnectContext();
+    let { login, retrieveAccessTokenFromLocalStorage, retrieveAndSetWalletsBasedOnAccessToken, accessToken, setAccessToken, username, setUsername, walletList, setWalletList, activeWallet, setActiveWallet } = useUserContext();
+
+    // State for Login Modal
+    const [openLoginModal, setOpenLoginModal] = useState(false);
+    // State for Register Modal
+    const [openRegisterModal, setOpenRegisterModal] = useState(false);
 
     // Component Did Mount (Runs once on mounting)
     useEffect(() => {
-        metamaskSetupOperations();
-
-        // A (MINUTE_MS) timed function to retrieve new data from the contract
-        const interval = setInterval(() => {
-            console.log("Refreshing data...");
-            metamaskSetupOperations();
-        }, process.env.REACT_APP_REFRESH_RATE_MS);
-        return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+        retrieveAccessTokenFromLocalStorage();
     }, []);
 
     return (
         <AppBar position="static">
             <Toolbar>
-                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }} noWrap="true">
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }} noWrap={true}>
                     DAO Insurance Demo App
                 </Typography>
-                {/* Button appears when metamask isn't installed */}
-                {!metamaskExistCheck && (
-                    <Link href="https://metamask.io/download/" underline="none" target="_blank" rel="noreferrer">
-                        <Button variant="contained" color="secondary">
-                            Download Metamask
-                        </Button>
-                    </Link>
-                )}
-                {/* Button appears when metamask is installed and user isn't connected  */}
-                {metamaskExistCheck && !currentAccountAddress && (
-                    <Button variant="contained" color="secondary" onClick={connectWallet}>
-                        Connect To Metamask
-                    </Button>
-                )}
-                {/* Button appears when metamask is installed and user is connected */}
-                {metamaskExistCheck && currentAccountAddress && (
+                {!accessToken && (
                     <>
-                        <div className="pe-3 d-flex justify-content-center">
-                            <div className="text-end">
-                                <Typography>
-                                    Connected to{" "}
-                                    <Typography color="info.contrastText" component="span">
-                                        {currentAccountAddress}
-                                    </Typography>
+                        <Button variant="contained" color="secondary" sx={{ mr: 1 }} onClick={() => setOpenRegisterModal(true)}>
+                            Register
+                        </Button>
+                        <Button variant="contained" color="secondary" onClick={() => setOpenLoginModal(true)}>
+                            Login
+                        </Button>
+                    </>
+                )}
+                {accessToken && (
+                    <>
+                        <Box className="d-flex flex-column align-items-end m-2">
+                            <Box className="d-flex justify-content-between w-100">
+                                <Typography component="div" noWrap={true}>
+                                    Welcome, {username}{" "}
                                 </Typography>
-                                <Typography>
+                                <Box>
                                     <i className="fa-brands fa-ethereum"></i> GAS Balance:{" "}
                                     <Typography color="info.contrastText" component="span">
-                                        {currentAccountGasBal}
+                                        0
                                     </Typography>
-                                </Typography>
-                                <div></div>
-                            </div>
-                        </div>
+                                </Box>
+                            </Box>
+                            <FormControl fullWidth size="small">
+                                <InputLabel disableAnimation color="info" id="active-wallet">
+                                    Active Wallet
+                                </InputLabel>
+                                <Select
+                                    labelId="active-wallet"
+                                    value={activeWallet}
+                                    label="Age"
+                                    onChange={(evt) => {
+                                        setActiveWallet(evt.target.value);
+                                    }}
+                                >
+                                    {walletList.map((row, index) => (
+                                        <MenuItem key={index} value={index}>
+                                            {row}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+
+                        <Avatar sx={{ mr: 1 }}>{username[0].toUpperCase()}</Avatar>
                         <Button
                             variant="contained"
                             color="secondary"
                             onClick={() => {
-                                setCurrentAccountAddress("");
+                                console.log("Clearing local storage");
+                                setAccessToken("");
+                                setUsername("");
+                                setWalletList([]);
+                                localStorage.setItem("accessToken", "");
                             }}
                         >
-                            Disconnect
+                            Logout
                         </Button>
                     </>
                 )}
             </Toolbar>
+            <LoginModal open={openLoginModal} onClose={() => setOpenLoginModal(false)} />
+            <RegisterModal open={openRegisterModal} onClose={() => setOpenRegisterModal(false)} />
         </AppBar>
     );
 };

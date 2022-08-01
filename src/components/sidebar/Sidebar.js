@@ -11,6 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 
 import { sidebarLabel1 } from "./consts/sidebarLabel1";
 import { sidebarLabel2 } from "./consts/sidebarLabel2";
+import { sidebarLabel3 } from "./consts/sidebarLabel3";
 
 import logo from "../../media/logo.jpg";
 
@@ -47,6 +48,17 @@ const Sidebar = () => {
             <Divider />
             <List>
                 {sidebarLabel2.map((item, index) => (
+                    <ListItem key={item.id} disablePadding onClick={() => navigate(item.route)}>
+                        <ListItemButton>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.label} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+            <Divider />
+            <List>
+                {sidebarLabel3.map((item, index) => (
                     <ListItem key={item.id} disablePadding onClick={() => navigate(item.route)}>
                         <ListItemButton>
                             <ListItemIcon>{item.icon}</ListItemIcon>
