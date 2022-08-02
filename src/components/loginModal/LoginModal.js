@@ -7,6 +7,8 @@ import { TextField, Typography, Button } from "@mui/material";
 
 import { useUserContext } from "../../contexts/userProvider";
 
+import singpass from "../../media/singpass.jpg";
+
 const wrapperStyle = {
     position: "absolute",
     top: "50%",
@@ -59,6 +61,9 @@ const LoginModal = ({ open, onClose }) => {
                         <TextField required id="outlined-required" label="Password" name="password" sx={marginStyle} value={formInput.password} onChange={onChangeHandler} />
                         <Button variant="contained" color="secondary" sx={marginStyle} onClick={onClickLogin}>
                             Login
+                        </Button>
+                        <Button>
+                            <img className="mt-2" src={singpass} alt="Singpass" style={{ height: "64px" }} />
                         </Button>
                         <Typography sx={marginStyle}>Register a new account.</Typography>
                         <Typography sx={marginStyle}>Forgot your password?</Typography>

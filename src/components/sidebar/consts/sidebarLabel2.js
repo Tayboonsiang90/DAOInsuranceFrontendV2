@@ -1,29 +1,37 @@
 import LooksOneIcon from "@mui/icons-material/LooksOne";
+import CreateNewGuild from "../../../pages/Group2/CreateNewGuild/CreateNewGuild";
+import ViewGuilds from "../../../pages/Group2/ViewGuilds/ViewGuilds";
+import GuildGovernance from "../../../pages/Group2/GuildGovernance/GuildGovernance";
+import Faq2 from "../../../pages/Group2/Faq2/Faq2";
 
-import CreateNewProposal from "../../../pages/Group2/CreateNewProposal/CreateNewProposal";
-import ViewCurrentProposals from "../../../pages/Group2/ViewCurrentProposals/ViewCurrentProposals";
-import ViewOldProposals from "../../../pages/Group2/ViewOldProposals/ViewOldProposals";
 
 export const sidebarLabel2 = [
     {
         id: 0,
         icon: <LooksOneIcon />,
-        label: "Create New Proposal",
-        route: "create-new-proposal",
-        page: <CreateNewProposal />,
+        label: "Create New Guild",
+        route: "create-new-guild",
+        page: <CreateNewGuild />,
     },
     {
         id: 1,
         icon: <LooksOneIcon />,
-        label: "View Current Proposals",
-        route: "view-current-proposals",
-        page: <ViewCurrentProposals />,
+        label: "View Guilds (Join/Leave)",
+        route: "view-guilds",
+        page: <ViewGuilds />,
     },
     {
         id: 2,
         icon: <LooksOneIcon />,
-        label: "View Old Proposals",
-        route: "view-old-proposals",
-        page: <ViewOldProposals />,
+        label: "Guild Governance",
+        route: "guild-governance",
+        page: <GuildGovernance />,
+    },
+    {
+        id: 3,
+        icon: <LooksOneIcon />,
+        label: "FAQ",
+        route: "faq-2",
+        page: <Faq2 />,
     },
 ];

@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { TextField, Typography, Button } from "@mui/material";
+import singpass from "../../media/singpass.jpg";
 
 const wrapperStyle = {
     position: "absolute",
@@ -41,6 +42,9 @@ const RegisterModal = ({ open, onClose }) => {
                         <TextField required id="outlined-required" label="Repeat Password" sx={marginStyle} />
                         <Button variant="contained" color="secondary" sx={marginStyle}>
                             Register
+                        </Button>
+                        <Button>
+                            <img className="mt-2" src={singpass} alt="Singpass" style={{ height: "64px" }} />
                         </Button>
                         <Typography sx={marginStyle}>Already have an account? Login here.</Typography>
                     </Box>

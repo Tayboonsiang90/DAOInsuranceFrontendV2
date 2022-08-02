@@ -50,7 +50,7 @@ const Navbar = () => {
                                     Welcome, {username}{" "}
                                 </Typography>
                                 <Box>
-                                    <i className="fa-brands fa-ethereum"></i> GAS Balance:{" "}
+                                    <i className="fa-solid fa-sack-dollar"></i> SGDP Balance:{" "}
                                     <Typography color="info.contrastText" component="span">
                                         0
                                     </Typography>

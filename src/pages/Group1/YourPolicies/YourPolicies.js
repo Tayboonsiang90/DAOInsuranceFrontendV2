@@ -1,209 +1,349 @@
 import React from "react";
+import { Typography, Grid, Box, Select, MenuItem, Button, Divider } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+import MuiAccordion from "@mui/material/Accordion";
+import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import Modal from "@mui/material/Modal";
+
+const Accordion = styled((props) => <MuiAccordion disableGutters elevation={0} square {...props} />)(({ theme }) => ({
+    border: `1px solid ${theme.palette.divider}`,
+    "&:not(:last-child)": {
+        borderBottom: 0,
+    },
+    "&:before": {
+        display: "none",
+    },
+}));
+
+const AccordionSummary = styled((props) => <MuiAccordionSummary expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />} {...props} />)(({ theme }) => ({
+    flexDirection: "row-reverse",
+    "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+        transform: "rotate(90deg)",
+    },
+    "& .MuiAccordionSummary-content": {
+        marginLeft: theme.spacing(1),
+    },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    borderTop: "1px solid rgba(0, 0, 0, .125)",
+}));
+
+const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+};
 
 const YourPolicies = () => {
+    const [expanded, setExpanded] = React.useState("panel1");
+
+    const handleChange = (panel) => (event, newExpanded) => {
+        setExpanded(newExpanded ? panel : false);
+    };
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
         <React.Fragment>
-            <div className="d-flex flex-column justify-content-center">
-                <h3 className="font-alert p-3">Your Registered ETH Address: </h3>
-                <h1 className="font-fancy p-3">Your Policies with Us</h1>
-                <div className="accordion" id="accordionExample">
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingOne">
-                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Policy #37465: Car
-                            </button>
-                        </h2>
-                        <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div className="accordion-body">
-                                <div className="row">
-                                    <div className="col-6">
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy Number:</span> 37465
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Type of Cover:</span> Comprehensive / Named Driver Plan
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy Start Date:</span> 18/05/2022
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy End Date:</span> 17/08/2023
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Driver:</span> Tay Boon Siang
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Phone:</span> +65 97726707
-                                        </div>
-                                        <div className="mt-3">
-                                            <span className="fw-bold font-alert">Vehicle Registration Number:</span> SMD2848H
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Make & Model:</span> Hyundai Elantra 1.6
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Vehicle Colour:</span> Silver
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Year of First Registration:</span> 2018
-                                        </div>
-
-                                        <div className="mt-3">
-                                            <span className="fw-bold font-alert">Total Premium Payable:</span> S$745.42
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Monthly Premium Payable:</span> S$62.12
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Premium Paid To Date:</span> $124.24
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Next Premium Due:</span> 18/7/2022
-                                        </div>
-                                    </div>
-                                    <div className="col-6 d-flex flex-column justify-content-center">
-                                        <button type="button" className="btn btn-success btn-lg font-alert mt-4">
-                                            View Policy Documents
-                                        </button>
-                                        <button type="button" className="btn btn-danger btn-lg font-alert mt-4">
-                                            Pay S$62.12 for 18/7/2022
-                                        </button>
-                                        <button type="button" className="btn btn-primary btn-lg font-alert mt-4">
-                                            Submit Claim
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingTwo">
-                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Policy #34867: Car
-                            </button>
-                        </h2>
-                        <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div className="accordion-body">
-                                <div className="row">
-                                    <div className="col-6">
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy Number:</span> 34867
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Type of Cover:</span> Comprehensive / Named Driver Plan
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy Start Date:</span> 18/05/2022
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy End Date:</span> 17/08/2023
-                                        </div>
-                                        <div className="mt-3">
-                                            <span className="fw-bold font-alert">Vehicle Registration Number:</span> SMD2848H
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Make & Model:</span> Hyundai Elantra 1.6
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Vehicle Colour:</span> Silver
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Year of First Registration:</span> 2018
-                                        </div>
-
-                                        <div className="mt-3">
-                                            <span className="fw-bold font-alert">Total Premium Payable:</span> S$745.42
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Monthly Premium Payable:</span> S$62.12
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Premium Paid To Date:</span> $124.24
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Next Premium Due:</span> 18/7/2022
-                                        </div>
-                                    </div>
-                                    <div className="col-6 d-flex flex-column justify-content-center">
-                                        <button type="button" className="btn btn-success btn-lg font-alert mt-4">
-                                            View Policy Documents
-                                        </button>
-                                        <button type="button" className="btn btn-danger btn-lg font-alert mt-4">
-                                            Pay S$62.12 for 18/7/2022
-                                        </button>
-                                        <button type="button" className="btn btn-primary btn-lg font-alert mt-4">
-                                            Submit Claim
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="accordion-item">
-                        <h2 className="accordion-header" id="headingThree">
-                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Policy #29846: Car
-                            </button>
-                        </h2>
-                        <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div className="accordion-body">
-                                <div className="row">
-                                    <div className="col-6">
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy Number:</span> 29846
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Type of Cover:</span> Comprehensive / Named Driver Plan
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy Start Date:</span> 18/05/2022
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Policy End Date:</span> 17/08/2023
-                                        </div>
-                                        <div className="mt-3">
-                                            <span className="fw-bold font-alert">Vehicle Registration Number:</span> SMD2848H
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Make & Model:</span> Hyundai Elantra 1.6
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Vehicle Colour:</span> Silver
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Year of First Registration:</span> 2018
-                                        </div>
-
-                                        <div className="mt-3">
-                                            <span className="fw-bold font-alert">Total Premium Payable:</span> S$745.42
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Monthly Premium Payable:</span> S$62.12
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Premium Paid To Date:</span> $124.24
-                                        </div>
-                                        <div>
-                                            <span className="fw-bold font-alert">Next Premium Due:</span> 18/7/2022
-                                        </div>
-                                    </div>
-                                    <div className="col-6 d-flex flex-column justify-content-center">
-                                        <button type="button" className="btn btn-success btn-lg font-alert mt-4">
-                                            View Policy Documents
-                                        </button>
-                                        <button type="button" className="btn btn-danger btn-lg font-alert mt-4">
-                                            Pay S$62.12 for 18/7/2022
-                                        </button>
-                                        <button type="button" className="btn btn-primary btn-lg font-alert mt-4">
-                                            Submit Claim
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Typography variant="h2">Your Active Policies</Typography>
+            <Modal open={open} onClose={handleClose}>
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Text in a modal
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                    </Typography>
+                </Box>
+            </Modal>
+            <Accordion className="mt-4" expanded={expanded === "panel11"} onChange={handleChange("panel11")}>
+                <AccordionSummary id="panel11d-header">
+                    <Typography>Policy #14353</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <Divider className="mb-2" />
+                            <Typography>Car Make: Audi </Typography>
+                            <Typography>Car Model: A4</Typography>
+                            <Typography>Year Registered: 2018</Typography>
+                            <Typography>Car Plate Number: SMD2848H</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Monthly Premium: SGDP $68</Typography>
+                            <Typography>Policy Start Date: 18/05/2022</Typography>
+                            <Typography>Policy End Date: 17/08/2023</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Purchasing Guild: None</Typography>
+                            <Typography>Guild Discount: 0%</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Claims Made: 1</Typography>
+                            <Divider className="mt-2" />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button type="submit" fullWidth variant="contained" color="success">
+                                View Policy Document (PDF)
+                            </Button>
+                            <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                    <Button type="submit" fullWidth variant="contained" className="mt-3" color="primary">
+                                        Pay Premium for
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Select fullWidth color="secondary" required labelId="select1label" id="select1" label="Months" name="carMake">
+                                        {[...Array(24).keys()].map((index) => (
+                                            <MenuItem key={index + 1} value={index + 1}>
+                                                {index + 1} months
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Button onClick={handleOpen} type="submit" fullWidth variant="contained" className="mt-3" color="warning">
+                                Submit Claim
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={expanded === "panel12"} onChange={handleChange("panel12")}>
+                <AccordionSummary id="panel12d-header">
+                    <Typography>Policy #26636</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <Divider className="mb-2" />
+                            <Typography>Car Make: Audi </Typography>
+                            <Typography>Car Model: A4</Typography>
+                            <Typography>Year Registered: 2018</Typography>
+                            <Typography>Car Plate Number: SMD2848H</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Monthly Premium: SGDP $68</Typography>
+                            <Typography>Policy Start Date: 18/05/2022</Typography>
+                            <Typography>Policy End Date: 17/08/2023</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Purchasing Guild: None</Typography>
+                            <Typography>Guild Discount: 0%</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Claims Made: 1</Typography>
+                            <Divider className="mt-2" />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button type="submit" fullWidth variant="contained" color="success">
+                                View Policy Document (PDF)
+                            </Button>
+                            <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                    <Button type="submit" fullWidth variant="contained" className="mt-3" color="primary">
+                                        Pay Premium for
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Select fullWidth color="secondary" required labelId="select1label" id="select1" label="Months" name="carMake">
+                                        {[...Array(24).keys()].map((index) => (
+                                            <MenuItem key={index + 1} value={index + 1}>
+                                                {index + 1} months
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Button onClick={handleOpen} type="submit" fullWidth variant="contained" className="mt-3" color="warning">
+                                Submit Claim
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={expanded === "panel13"} onChange={handleChange("panel13")}>
+                <AccordionSummary id="panel13d-header">
+                    <Typography>Policy #36344</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <Divider className="mb-2" />
+                            <Typography>Car Make: Audi </Typography>
+                            <Typography>Car Model: A4</Typography>
+                            <Typography>Year Registered: 2018</Typography>
+                            <Typography>Car Plate Number: SMD2848H</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Monthly Premium: SGDP $68</Typography>
+                            <Typography>Policy Start Date: 18/05/2022</Typography>
+                            <Typography>Policy End Date: 17/08/2023</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Purchasing Guild: None</Typography>
+                            <Typography>Guild Discount: 0%</Typography>
+                            <Divider className="mb-2 mt-2" />
+                            <Typography>Claims Made: 1</Typography>
+                            <Divider className="mt-2" />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button type="submit" fullWidth variant="contained" color="success">
+                                View Policy Document (PDF)
+                            </Button>
+                            <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                    <Button type="submit" fullWidth variant="contained" className="mt-3" color="primary">
+                                        Pay Premium for
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Select fullWidth color="secondary" required labelId="select1label" id="select1" label="Months" name="carMake">
+                                        {[...Array(24).keys()].map((index) => (
+                                            <MenuItem key={index + 1} value={index + 1}>
+                                                {index + 1} months
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Button onClick={handleOpen} type="submit" fullWidth variant="contained" className="mt-3" color="warning">
+                                Submit Claim
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Typography variant="h2" className="mt-5">
+                Your Expired Policies
+            </Typography>
+            <Accordion className="mt-4" expanded={expanded === "panel21"} onChange={handleChange("panel21")}>
+                <AccordionSummary id="panel21d-header">
+                    <Typography>Policy #1464</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <Typography>Car Make: </Typography>
+                            <Typography>Car Model: </Typography>
+                            <Typography>Year Registered: </Typography>
+                            <Typography>Car Plate Number: </Typography>
+                            <Typography>Purchasing Guild: </Typography>
+                            <Typography>Car Make: </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button type="submit" fullWidth variant="contained" color="success">
+                                View Policy Document (PDF)
+                            </Button>
+                            <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                    <Button disabled type="submit" fullWidth variant="contained" className="mt-3" color="primary">
+                                        Pay Premium for
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Select fullWidth color="secondary" required labelId="select1label" id="select1" label="Months" name="carMake">
+                                        {[...Array(24).keys()].map((index) => (
+                                            <MenuItem key={index + 1} value={index + 1}>
+                                                {index + 1} months
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Button disabled type="submit" fullWidth variant="contained" className="mt-3" color="warning">
+                                Submit Claim
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={expanded === "panel22"} onChange={handleChange("panel22")}>
+                <AccordionSummary id="panel22d-header">
+                    <Typography>Policy #2436</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <Typography>Car Make: </Typography>
+                            <Typography>Car Model: </Typography>
+                            <Typography>Year Registered: </Typography>
+                            <Typography>Car Plate Number: </Typography>
+                            <Typography>Purchasing Guild: </Typography>
+                            <Typography>Car Make: </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button type="submit" fullWidth variant="contained" color="success">
+                                View Policy Document (PDF)
+                            </Button>
+                            <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                    <Button disabled type="submit" fullWidth variant="contained" className="mt-3" color="primary">
+                                        Pay Premium for
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Select fullWidth color="secondary" required labelId="select1label" id="select1" label="Months" name="carMake">
+                                        {[...Array(24).keys()].map((index) => (
+                                            <MenuItem key={index + 1} value={index + 1}>
+                                                {index + 1} months
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Button disabled type="submit" fullWidth variant="contained" className="mt-3" color="warning">
+                                Submit Claim
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+            <Accordion expanded={expanded === "panel23"} onChange={handleChange("panel23")}>
+                <AccordionSummary id="panel23d-header">
+                    <Typography>Policy #3464</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <Typography>Car Make: </Typography>
+                            <Typography>Car Model: </Typography>
+                            <Typography>Year Registered: </Typography>
+                            <Typography>Car Plate Number: </Typography>
+                            <Typography>Purchasing Guild: </Typography>
+                            <Typography>Car Make: </Typography>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Button type="submit" fullWidth variant="contained" color="success">
+                                View Policy Document (PDF)
+                            </Button>
+                            <Grid container>
+                                <Grid item xs={12} sm={6}>
+                                    <Button disabled type="submit" fullWidth variant="contained" className="mt-3" color="primary">
+                                        Pay Premium for
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Select fullWidth color="secondary" required labelId="select1label" id="select1" label="Months" name="carMake">
+                                        {[...Array(24).keys()].map((index) => (
+                                            <MenuItem key={index + 1} value={index + 1}>
+                                                {index + 1} months
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Button disabled type="submit" fullWidth variant="contained" className="mt-3" color="warning">
+                                Submit Claim
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
         </React.Fragment>
     );
 };

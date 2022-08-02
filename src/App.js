@@ -5,6 +5,7 @@ import { Box } from "@mui/material";
 import { UserProvider } from "./contexts/userProvider";
 
 import { drawerWidth } from "./components/sidebar/Sidebar";
+import { Container } from "@mui/system";
 
 function App() {
     return (
@@ -13,7 +14,9 @@ function App() {
                 <Sidebar />
                 <Box component="main" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
                     <Navbar />
-                    <Outlet />
+                    <Container className="mt-3">
+                        <Outlet />
+                    </Container>
                 </Box>
             </UserProvider>
         </div>
